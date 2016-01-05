@@ -1,12 +1,20 @@
 class Api::V1::InvoiceItemsController < ApplicationController
-  respond_to :json, :xml
+  respond_to :json
 
   def index
     respond_with InvoiceItem.all
   end
 
   def show
-    respond_with InvoiceItem.find_by(id: params[:id])
+    respond_with InvoiceItem.find_by(invoice_item_params)
+  end
+
+  def find
+    respond_with InvoiceItem.where(invoice_item_params)
+  end
+
+  def find_all
+    respond_with InvoiceItem.where("#{params.first.first}": params.first.last)
   end
 
   def create
@@ -24,7 +32,7 @@ class Api::V1::InvoiceItemsController < ApplicationController
   private
 
   def invoice_item_params
-    params.require(:invoice_item).permit(:name, :description, :image_url)
+    params.permit(:id, :customer_id, :merchant_id, :status, :created_at, :updated_at)
   end
 
 end

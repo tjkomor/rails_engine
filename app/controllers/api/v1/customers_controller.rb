@@ -1,5 +1,5 @@
 class Api::V1::CustomersController < ApplicationController
-  respond_to :json, :xml
+  respond_to :json
 
   def index
     respond_with Customer.all
@@ -14,19 +14,11 @@ class Api::V1::CustomersController < ApplicationController
   end
 
   def find
-    if params['first_name'] || params['last_name']
-      respond_with Customer.where("#{params.first.first} ILIKE ?", params.first.last).first
-    else
-      respond_with Customer.where("#{params.first.first}": params.first.last.to_i).first
-    end
+    respond_with Customer.find_by(customer_params)
   end
 
   def find_all
-    if params['first_name'] || params['last_name']
-      respond_with Customer.where("#{params.first.first} ILIKE ?", params.first.last)
-    else
-      respond_with Customer.where("#{params.first.first}": params.first.last.to_i)
-    end
+    respond_with Customer.where(customer_params)
   end
 
   def create
@@ -44,7 +36,7 @@ class Api::V1::CustomersController < ApplicationController
   private
 
   def customer_params
-    params.require(:customer).permit(:name, :description, :image_url)
+    params.permit(:id, :first_name, :last_name, :created_at, :updated_at)
   end
 
 end

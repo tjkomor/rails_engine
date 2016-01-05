@@ -1,5 +1,5 @@
 class Api::V1::ItemsController < ApplicationController
-  respond_to :json, :xml
+  respond_to :json
 
   def index
     respond_with Item.all
@@ -7,6 +7,18 @@ class Api::V1::ItemsController < ApplicationController
 
   def show
     respond_with Item.find_by(id: params[:id])
+  end
+
+  def find
+    respond_with Item.find_by(item_params)
+  end
+
+  def find_all
+    respond_with Item.where(item_params)
+  end
+
+  def random
+    respond_with Item.random
   end
 
   def create
@@ -24,7 +36,7 @@ class Api::V1::ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:name, :description, :image_url)
+    params.permit(:id, :name, :unit_price, :merchant_id, :created_at, :updated_at, :quantity)
   end
 
 end
