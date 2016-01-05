@@ -14,11 +14,7 @@ class Api::V1::InvoiceItemsController < ApplicationController
   end
 
   def find_all
-    respond_with InvoiceItem.where("#{params.first.first}": params.first.last)
-  end
-
-  def create
-    respond_with InvoiceItem.create(invoice_item_params)
+    respond_with InvoiceItem.where(invoice_item_params)
   end
 
   def update
@@ -32,7 +28,12 @@ class Api::V1::InvoiceItemsController < ApplicationController
   private
 
   def invoice_item_params
-    params.permit(:id, :customer_id, :merchant_id, :status, :created_at, :updated_at)
+    params.permit(:item_id,
+                  :quantity,
+                  :unit_price,
+                  :invoice_id,
+                  :created_at,
+                  :updated_at)
   end
 
 end

@@ -21,10 +21,6 @@ class Api::V1::MerchantsController < ApplicationController
     respond_with Merchant.random
   end
 
-  def create
-    respond_with Merchant.create(merchant_params)
-  end
-
   def update
     respond_with Merchant.update(params[:id], merchant_params)
   end
@@ -36,7 +32,12 @@ class Api::V1::MerchantsController < ApplicationController
   private
 
   def merchant_params
-    params.permit(:id, :name, :created_at, :updated_at, :date, :quantity)
+    params.permit(:id,
+                  :name,
+                  :created_at,
+                  :updated_at,
+                  :date,
+                  :quantity)
   end
 
 end

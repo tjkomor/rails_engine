@@ -21,10 +21,6 @@ class Api::V1::ItemsController < ApplicationController
     respond_with Item.random
   end
 
-  def create
-    respond_with Item.create(item_params)
-  end
-
   def update
     respond_with Item.update(params[:id], item_params)
   end
@@ -36,7 +32,13 @@ class Api::V1::ItemsController < ApplicationController
   private
 
   def item_params
-    params.permit(:id, :name, :unit_price, :merchant_id, :created_at, :updated_at, :quantity)
+    params.permit(:id,
+                  :name,
+                  :unit_price,
+                  :merchant_id,
+                  :created_at,
+                  :updated_at,
+                  :quantity)
   end
 
 end
