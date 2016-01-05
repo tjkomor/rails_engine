@@ -21,10 +21,6 @@ class Api::V1::CustomersController < ApplicationController
     respond_with Customer.where(customer_params)
   end
 
-  def create
-    respond_with Customer.create(customer_params)
-  end
-
   def update
     respond_with Customer.update(params[:id], customer_params)
   end
@@ -36,7 +32,11 @@ class Api::V1::CustomersController < ApplicationController
   private
 
   def customer_params
-    params.permit(:id, :first_name, :last_name, :created_at, :updated_at)
+    params.permit(:id,
+                  :first_name,
+                  :last_name,
+                  :created_at,
+                  :updated_at)
   end
 
 end
