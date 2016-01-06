@@ -22,7 +22,6 @@ class Api::V1::ItemsControllerTest < ActionController::TestCase
     json_response.each do |item|
       assert item["name"]
       assert item["description"]
-      assert item['unit_price']
     end
   end
 

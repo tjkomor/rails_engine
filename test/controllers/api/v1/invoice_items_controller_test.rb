@@ -22,7 +22,6 @@ class Api::V1::InvoiceItemsControllerTest < ActionController::TestCase
     json_response.each do |invoice_item|
       assert invoice_item["created_at"]
       assert invoice_item['updated_at']
-      assert invoice_item["unit_price"]
       assert invoice_item["quantity"]
     end
   end

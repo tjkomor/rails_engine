@@ -3,9 +3,9 @@
 one:
   name: MyString
   description: MyString
-  unit_price: MyString
+
 
 two:
   name: MyString
   description: MyString
-  unit_price: MyString
+  

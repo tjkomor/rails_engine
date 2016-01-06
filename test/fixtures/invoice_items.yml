@@ -2,8 +2,7 @@
 
 one:
   quantity: MyString
-  unit_price: MyString
+  
 
 two:
   quantity: MyString
-  unit_price: MyString

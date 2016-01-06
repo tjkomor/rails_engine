@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   namespace :api do
     namespace :v1 do
       resources :customers, only: [:index, :show] do
@@ -48,6 +49,7 @@ Rails.application.routes.draw do
           get 'find'
           get 'find_all'
           get 'random'
+          get 'most_revenue', to: 'items_most_revenue#index'
         end
 
         member do
