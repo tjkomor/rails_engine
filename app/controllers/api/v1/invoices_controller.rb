@@ -30,7 +30,7 @@ class Api::V1::InvoicesController < ApplicationController
   end
 
   def customer
-    respond_with find_invoice.customers
+    respond_with find_invoice.customer
   end
 
   def merchant
