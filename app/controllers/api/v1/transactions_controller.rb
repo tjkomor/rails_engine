@@ -21,12 +21,8 @@ class Api::V1::TransactionsController < ApplicationController
     respond_with Transaction.random
   end
 
-  def update
-    respond_with Transaction.update(params[:id], transaction_params)
-  end
-
-  def destroy
-    respond_with Transaction.destroy(params[:id])
+  def invoice
+    respond_with find_transaction.invoice
   end
 
   private
@@ -40,5 +36,10 @@ class Api::V1::TransactionsController < ApplicationController
                   :created_at,
                   :updated_at)
   end
+
+  def find_transaction
+    Transaction.find_by(id: params[:id])
+  end
+
 
 end

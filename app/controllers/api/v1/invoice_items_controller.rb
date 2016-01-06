@@ -10,19 +10,19 @@ class Api::V1::InvoiceItemsController < ApplicationController
   end
 
   def find
-    respond_with InvoiceItem.where(invoice_item_params)
+    respond_with InvoiceItem.find_by(invoice_item_params)
   end
 
   def find_all
     respond_with InvoiceItem.where(invoice_item_params)
   end
 
-  def update
-    respond_with InvoiceItem.update(params[:id], invoice_item_params)
+  def item
+    respond_with find_invoice_item.item
   end
 
-  def destroy
-    respond_with InvoiceItem.destroy(params[:id])
+  def invoice
+    respond_with find_invoice_item.invoice
   end
 
   private
@@ -34,6 +34,10 @@ class Api::V1::InvoiceItemsController < ApplicationController
                   :invoice_id,
                   :created_at,
                   :updated_at)
+  end
+
+  def find_invoice_item
+    InvoiceItem.find_by(id: params[:id])
   end
 
 end

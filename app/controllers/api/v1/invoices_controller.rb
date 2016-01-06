@@ -6,7 +6,7 @@ class Api::V1::InvoicesController < ApplicationController
   end
 
   def show
-    respond_with Invoice.find_by(id: params[:id])
+    respond_with find_invoice
   end
 
   def find
@@ -17,19 +17,35 @@ class Api::V1::InvoicesController < ApplicationController
     respond_with Invoice.where(invoice_params)
   end
 
+  def items
+    respond_with find_invoice.items
+  end
+
+  def transactions
+    respond_with find_invoice.transactions
+  end
+
+  def invoice_items
+    respond_with find_invoice.invoice_items
+  end
+
+  def customer
+    respond_with find_invoice.customers
+  end
+
+  def merchant
+    respond_with find_invoice.merchant
+  end
+
   def random
     respond_with Invoice.random
   end
 
-  def update
-    respond_with Invoice.update(params[:id], invoice_params)
-  end
-
-  def destroy
-    respond_with Invoice.destroy(params[:id])
-  end
-
   private
+
+  def find_invoice
+    Invoice.find_by(id: params[:id])
+  end
 
   def invoice_params
     params.permit(:id,

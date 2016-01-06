@@ -21,12 +21,12 @@ class Api::V1::ItemsController < ApplicationController
     respond_with Item.random
   end
 
-  def update
-    respond_with Item.update(params[:id], item_params)
+  def invoice_items
+    respond_with find_item.invoice_items
   end
 
-  def destroy
-    respond_with Item.destroy(params[:id])
+  def merchant
+    respond_with find_item.merchant
   end
 
   private
@@ -39,6 +39,10 @@ class Api::V1::ItemsController < ApplicationController
                   :created_at,
                   :updated_at,
                   :quantity)
+  end
+
+  def find_item
+    Item.find_by(id: params[:id])
   end
 
 end

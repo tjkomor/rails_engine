@@ -1,54 +1,86 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      resources :customers, except: [:new, :edit], defaults: {format: :json} do
+      resources :customers, only: [:index, :show] do
         collection do
           get 'find'
           get 'find_all'
           get 'random'
+        end
+
+        member do
+          get 'invoices'
+          get 'transactions'
         end
       end
 
-      resources :invoice_items, except: [:new, :edit], defaults: {format: :json} do
+      resources :invoice_items, only: [:index, :show] do
         collection do
           get 'find'
           get 'find_all'
           get 'random'
+        end
+
+        member do
+          get 'invoice'
+          get 'item'
         end
       end
 
-      resources :invoices, except: [:new, :edit], defaults: {format: :json} do
+      resources :invoices, only: [:index, :show] do
         collection do
           get 'find'
           get 'find_all'
           get 'random'
+        end
+
+        member do
+          get 'transactions'
+          get 'invoice_items'
+          get 'items'
+          get 'customer'
+          get 'merchant'
         end
       end
 
-      resources :items, except: [:new, :edit], defaults: {format: :json} do
+      resources :items, only: [:index, :show] do
         collection do
           get 'find'
           get 'find_all'
           get 'random'
+        end
+
+        member do
+          get 'invoice_items'
+          get 'item'
         end
       end
 
-      resources :merchants, except: [:new, :edit], defaults: {format: :json} do
+      resources :merchants, only: [:index, :show] do
         collection do
           get 'find'
           get 'find_all'
           get 'random'
+        end
+
+        member do
+          get 'items'
+          get 'invoices'
         end
       end
 
-      resources :transactions, except: [:new, :edit], defaults: {format: :json} do
+      resources :transactions, only: [:index, :show] do
         collection do
           get 'find'
           get 'find_all'
           get 'random'
         end
+
+        member do
+          'invoice'
+        end
       end
-    
+
     end
   end
 end

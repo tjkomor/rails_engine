@@ -21,15 +21,19 @@ class Api::V1::MerchantsController < ApplicationController
     respond_with Merchant.random
   end
 
-  def update
-    respond_with Merchant.update(params[:id], merchant_params)
+  def items
+    find_merchant.items
   end
 
-  def destroy
-    respond_with Merchant.destroy(params[:id])
+  def invoices
+    find_merchant.invoices
   end
 
   private
+
+  def find_merchant
+    Merchant.find_by(id: params[:id])
+  end
 
   def merchant_params
     params.permit(:id,
