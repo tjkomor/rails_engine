@@ -22,11 +22,11 @@ class Api::V1::MerchantsController < ApplicationController
   end
 
   def items
-    find_merchant.items
+    respond_with find_merchant.items
   end
 
   def invoices
-    find_merchant.invoices
+    respond_with find_merchant.invoices
   end
 
   private
