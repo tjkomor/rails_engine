@@ -22,7 +22,7 @@ class Api::V1::TransactionsController < ApplicationController
   end
 
   def invoice
-    respond_with find_transaction.invoice
+    respond_with Transaction.find_by(id: params[:id]).invoice
   end
 
   private
@@ -36,10 +36,5 @@ class Api::V1::TransactionsController < ApplicationController
                   :created_at,
                   :updated_at)
   end
-
-  def find_transaction
-    Transaction.find_by(id: params[:id])
-  end
-
 
 end

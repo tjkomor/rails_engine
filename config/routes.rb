@@ -77,7 +77,7 @@ Rails.application.routes.draw do
         end
 
         member do
-          'invoice'
+          get 'invoice'
         end
       end
 
