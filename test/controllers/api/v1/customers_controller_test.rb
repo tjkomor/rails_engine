@@ -30,4 +30,9 @@ class Api::V1::CustomersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test '#random returns a valid entry' do
+    get :random, format: :json
+    assert_response :success
+  end
+
 end
