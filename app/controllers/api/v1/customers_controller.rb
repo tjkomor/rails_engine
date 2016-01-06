@@ -21,15 +21,19 @@ class Api::V1::CustomersController < ApplicationController
     respond_with Customer.where(customer_params)
   end
 
-  def update
-    respond_with Customer.update(params[:id], customer_params)
+  def invoices
+    respond_with find_customer.invoices
   end
 
-  def destroy
-    respond_with Customer.destroy(params[:id])
+  def transactions
+    respond_with find_customer.transactions
   end
 
   private
+
+  def find_customer
+    Customer.find_by(id: params[:id])
+  end
 
   def customer_params
     params.permit(:id,
