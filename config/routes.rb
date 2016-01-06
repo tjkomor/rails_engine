@@ -53,6 +53,7 @@ Rails.application.routes.draw do
         member do
           get 'invoice_items'
           get 'item'
+          get 'merchant'
         end
       end
 
