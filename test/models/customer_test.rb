@@ -8,9 +8,4 @@ class CustomerTest < ActiveSupport::TestCase
     assert customer.valid?
   end
 
-  test 'it can find top merchant id' do
-    Customer.merchants = [{'1' => 2}, {'4' => 5}]
-    top_merchant = {'4' => 5}
-    assert_equal top_merchant, Customer.merchants.top_merchant_id
-  end
 end
