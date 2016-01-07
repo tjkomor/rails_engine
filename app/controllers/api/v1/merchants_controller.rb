@@ -38,11 +38,16 @@ class Api::V1::MerchantsController < ApplicationController
   end
 
   def customers_with_pending_invoices
-   respond_with Merchant.find_by(merchant_params).customers_with_pending_invoices.uniq
+    respond_with Merchant.find_by(merchant_params).customers_with_pending_invoices.uniq
   end
 
   def most_revenue
     respond_with Merchant.most_revenue(find_merchant_params[:quantity])
+  end
+
+  def revenue_by_date
+    respond_with ({"total_revenue" => Merchant.all.revenue_by_date(params[:date])})
+
   end
 
   private

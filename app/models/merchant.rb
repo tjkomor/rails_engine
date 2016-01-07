@@ -39,6 +39,13 @@ class Merchant < ActiveRecord::Base
       .first(quantity.to_i)
   end
 
+  def self.revenue_by_date(date)
+    joins(invoices: [:transactions, :invoice_items])
+    .where('transactions.result = ?', 'success')
+    .where('invoices.created_at = ?', date)
+    .sum('invoice_items.quantity * invoice_items.unit_price')
+  end
+
   def customers_with_pending_invoices
     self.invoices.pending_invoice
   end

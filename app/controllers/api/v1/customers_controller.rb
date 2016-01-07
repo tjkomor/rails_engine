@@ -6,7 +6,7 @@ class Api::V1::CustomersController < ApplicationController
   end
 
   def show
-    respond_with Customer.find_by(id: params[:id])
+    respond_with find_customer
   end
 
   def random
