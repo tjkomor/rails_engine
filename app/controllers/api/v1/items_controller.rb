@@ -26,7 +26,7 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def merchant
-    respond_with find_item.merchant
+   respond_with Item.find_by(id: params[:id]).merchant
   end
 
   private

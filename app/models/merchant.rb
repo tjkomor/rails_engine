@@ -1,6 +1,10 @@
 class Merchant < ActiveRecord::Base
   has_many :invoices
   has_many :items
+  has_many :invoice_items, through: :invoices
+  has_many :customers, through: :invoices
+  has_many :transactions, through: :invoices
+
 
   def self.random
     order('RANDOM()').first
@@ -27,7 +31,16 @@ class Merchant < ActiveRecord::Base
     {'revenue' => revenue_total}
   end
 
-  def customers_with_pending_invoices
-    customers.joins(invoices: :transactions)
+  def self.most_revenue(quantity)
+    select("merchants.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue")
+      .joins(:invoice_items)
+      .group("merchants.id")
+      .order("revenue DESC")
+      .first(quantity.to_i)
   end
+
+  def customers_with_pending_invoices
+    self.invoices.pending_invoice
+  end
+
 end

@@ -1,12 +1,12 @@
 class Api::V1::MerchantsController < ApplicationController
-  respond_to :json
+  respond_to :json, :xml
 
   def index
     respond_with Merchant.all
   end
 
   def show
-    respond_with Merchant.find_by(id: params[:id])
+    respond_with find_merchant
   end
 
   def find
@@ -38,7 +38,11 @@ class Api::V1::MerchantsController < ApplicationController
   end
 
   def customers_with_pending_invoices
-    respond_with find_merchant.customers_with_pending_invoices
+   respond_with Merchant.find_by(merchant_params).customers_with_pending_invoices.uniq
+  end
+
+  def most_revenue
+    respond_with Merchant.most_revenue(find_merchant_params[:quantity])
   end
 
   private

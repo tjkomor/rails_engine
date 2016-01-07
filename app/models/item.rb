@@ -8,11 +8,4 @@ class Item < ActiveRecord::Base
     order('RANDOM()').first
   end
 
-  def most_revenue(quantity)
-    Invoice.successful_transactions
-  end
-
-  def most_items
-    
-  end
 end
