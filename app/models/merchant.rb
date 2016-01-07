@@ -31,6 +31,13 @@ class Merchant < ActiveRecord::Base
     {'revenue' => revenue_total}
   end
 
+  def self.most_items(quantity)
+    sorted_merchants = all.sort_by do |merchant|
+      merchant.total_items
+    end
+    sorted_merchants.last(quantity)
+  end
+
   def self.most_revenue(quantity)
     select("merchants.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue")
       .joins(:invoice_items)
@@ -48,6 +55,10 @@ class Merchant < ActiveRecord::Base
 
   def customers_with_pending_invoices
     self.invoices.pending_invoice
+  end
+
+  def total_items
+    self.invoices.successful_transactions.joins(:invoice_items).sum(:quantity)
   end
 
 end

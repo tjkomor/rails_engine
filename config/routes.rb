@@ -66,6 +66,7 @@ Rails.application.routes.draw do
           get 'find_all'
           get 'random'
           get 'most_revenue'
+          get 'most_items'
           get 'revenue', to: 'merchants#revenue_by_date'
         end
 
