@@ -38,14 +38,6 @@ class Merchant < ActiveRecord::Base
     sorted_merchants.last(quantity)
   end
 
-  def self.most_revenue(quantity)
-    select("merchants.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue")
-      .joins(:invoice_items)
-      .group("merchants.id")
-      .order("revenue DESC")
-      .first(quantity.to_i)
-  end
-
   def self.revenue_by_date(date)
     joins(invoices: [:transactions, :invoice_items])
     .where('transactions.result = ?', 'success')
@@ -54,11 +46,11 @@ class Merchant < ActiveRecord::Base
   end
 
   def customers_with_pending_invoices
-    self.invoices.pending_invoice
+    invoices.pending_invoice
   end
 
   def total_items
-    self.invoices.successful_transactions.joins(:invoice_items).sum(:quantity)
+    invoices.successful_transactions.joins(:invoice_items).sum(:quantity)
   end
 
 end

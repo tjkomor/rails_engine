@@ -29,15 +29,30 @@ class Api::V1::TransactionsControllerTest < ActionController::TestCase
 
   test '#show responds to JSON' do
     get :show, format: :json, id: Transaction.first.id
-    # assert_equal 1, json_response
     assert_kind_of Hash, json_response
-    # assert_equal 'Shipped', json_response['status']
     assert_response :success
   end
 
   test '#random returns a valid entry' do
     get :random, format: :json
     assert_response :success
+  end
+
+  test "#find_all returns an array of records" do
+    Transaction.create!(result: 'success')
+    Transaction.create!(result: 'success')
+    get :find_all, format: :json, result: 'success'
+
+    assert_equal 2, json_response.count
+  end
+
+  test "#invoice returns associated record" do
+    invoice = Invoice.create!(status: 'shipped')
+    transaction = invoice.transactions.create!(result: 'success')
+
+    get :invoice, format: :json, id: transaction.id
+
+    assert_equal invoice.status, json_response['status']
   end
 
 end

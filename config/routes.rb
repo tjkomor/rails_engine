@@ -34,6 +34,7 @@ Rails.application.routes.draw do
           get 'find'
           get 'find_all'
           get 'random'
+          get 'invoices'
         end
 
         member do

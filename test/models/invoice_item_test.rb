@@ -1,7 +1,9 @@
 require 'test_helper'
 
 class InvoiceItemTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'invoice_items are valid' do
+    invoice_item = InvoiceItem.first
+
+    invoice_item.valid?
+  end
 end

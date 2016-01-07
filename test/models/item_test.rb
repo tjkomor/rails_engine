@@ -1,7 +1,9 @@
 require 'test_helper'
 
 class ItemTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'items are valid' do
+    item = Item.first
+
+    item.valid?
+  end
 end
