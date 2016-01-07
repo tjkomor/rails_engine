@@ -5,5 +5,8 @@ class InvoiceItemTest < ActiveSupport::TestCase
     invoice_item = InvoiceItem.first
 
     invoice_item.valid?
+    assert invoice_item["created_at"]
+    assert invoice_item['updated_at']
+    assert invoice_item["quantity"]
   end
 end

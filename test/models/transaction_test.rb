@@ -5,5 +5,9 @@ class TransactionTest < ActiveSupport::TestCase
     transaction = Transaction.first
 
     transaction.valid?
+    assert transaction["credit_card_number"]
+    assert transaction["updated_at"]
+    assert transaction["created_at"]
+    assert transaction["result"]
   end
 end

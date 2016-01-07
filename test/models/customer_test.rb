@@ -6,6 +6,10 @@ class CustomerTest < ActiveSupport::TestCase
     customer = Customer.first
 
     assert customer.valid?
+    assert customer["first_name"]
+    assert customer["last_name"]
+    assert customer['created_at']
+    assert customer['updated_at']
   end
 
   test "top merchant id returns hash object" do

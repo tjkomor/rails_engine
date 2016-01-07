@@ -5,5 +5,9 @@ class ItemTest < ActiveSupport::TestCase
     item = Item.first
 
     item.valid?
+    assert item["name"]
+    assert item["description"]
+    assert item['created_at']
+    assert item['updated_at']
   end
 end

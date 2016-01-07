@@ -5,5 +5,9 @@ class MerchantTest < ActiveSupport::TestCase
     merchant = Merchant.first
 
     merchant.valid?
+    assert merchant["created_at"]
+    assert merchant['updated_at']
+    assert merchant["name"]
   end
+
 end
