@@ -73,5 +73,4 @@ class Api::V1::InvoicesControllerTest < ActionController::TestCase
     get :random, format: :json
     assert_response :success
   end
-
 end

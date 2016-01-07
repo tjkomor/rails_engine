@@ -80,5 +80,4 @@ class Api::V1::CustomersControllerTest < ActionController::TestCase
     assert_equal 2, json_response.count
     assert_equal invoice1.status, json_response.first['status']
   end
-
 end
